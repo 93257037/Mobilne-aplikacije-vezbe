@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <!-- ZAHTEV 7, 8: Stavka menija "Moje beleške" koja otvara BeleškeFragment -->
+    <item
+        android:id="@+id/menu_moje_beleske"
+        android:title="@string/moje_beleske"
+        app:showAsAction="ifRoom" />
+    
+</menu>
+

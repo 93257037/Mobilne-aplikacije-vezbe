@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PripremaResenja2"
+rootProject.name = "TestiranjeZaKolokvijum1"
 include ':app'

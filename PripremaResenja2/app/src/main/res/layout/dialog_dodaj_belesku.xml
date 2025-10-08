@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- ZAHTEV 9: Polje za unos naslova beleške -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/naslov_hint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextNaslov"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- ZAHTEV 9: Polje za unos teksta beleške -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/tekst_hint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextTekst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                android:gravity="top" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- ZAHTEV 9: DatePicker za izbor datuma -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/izaberi_datum"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+        <!-- ZAHTEV 9, 10: Dugme "Sačuvaj" -->
+        <Button
+            android:id="@+id/buttonSacuvaj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/sacuvaj" />
+
+    </LinearLayout>
+
+</ScrollView>
+

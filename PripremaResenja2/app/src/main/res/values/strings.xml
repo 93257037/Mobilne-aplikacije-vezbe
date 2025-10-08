@@ -1,11 +1,39 @@
 <resources>
-    <string name="app_name">PripremaResenja2</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="sign_in">Login</string>
-    <string name="login">Login</string>
-    <string name="trazi_dozvolu">Trazi dozvolu</string>
-    <string name="oboji_element">Oboji element</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">TestiranjeZaKolokvijum1</string>
+    
+    <!-- MainActivity (Registracija) -->
+    <string name="ime_prezime_hint">Ime i prezime</string>
+    <string name="email_hint">Email</string>
+    <string name="lozinka_hint">Lozinka</string>
+    <string name="registruj_se">Registruj se</string>
+    <string name="naslov_registracija">Registracija</string>
+    
+    <!-- LoginActivity -->
+    <string name="prijavi_se">Prijavi se</string>
+    <string name="naslov_login">Prijava</string>
+    
+    <!-- HomeActivity -->
+    <string name="dobrodosli_nazad">Dobrodošli nazad!</string>
+    <string name="moje_beleske">Moje beleške</string>
+    
+    <!-- BeleškeFragment -->
+    <string name="dodaj_belesku">Dodaj belešku</string>
+    <string name="filtriraj_po_datumu">Filtriraj po datumu</string>
+    <string name="sve_beleske">Sve beleške</string>
+    <string name="naslov_hint">Naslov</string>
+    <string name="tekst_hint">Tekst beleške</string>
+    <string name="sacuvaj">Sačuvaj</string>
+    <string name="izaberi_datum">Izaberi datum</string>
+    
+    <!-- Poruke -->
+    <string name="email_vec_postoji">Email je već registrovan!</string>
+    <string name="pogresni_podaci">Pogrešni podaci.</string>
+    <string name="uspesna_registracija">Uspešna registracija!</string>
+    <string name="popunite_sva_polja">Molimo popunite sva polja</string>
+    <string name="pristup_skladistu_nije_dozvoljen">Pristup skladištu nije dozvoljen!</string>
+    <string name="beleska_sacuvana">Beleška je sačuvana!</string>
+    
+    <!-- Opšti stringovi -->
+    <string name="ok">OK</string>
+    <string name="odustani">Odustani</string>
 </resources>

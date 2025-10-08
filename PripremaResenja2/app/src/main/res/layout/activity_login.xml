@@ -6,41 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
-    <!-- Naslov ekrana za registraciju -->
+    <!-- Naslov ekrana za prijavu -->
     <TextView
-        android:id="@+id/naslov_registracija"
+        android:id="@+id/naslov_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/naslov_registracija"
+        android:text="@string/naslov_login"
         android:textSize="28sp"
         android:textStyle="bold"
         android:layout_marginBottom="32dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/editTextImePrezime"
+        app:layout_constraintBottom_toTopOf="@+id/editTextLoginEmail"
         app:layout_constraintVertical_chainStyle="packed" />
-
-    <!-- Polje za unos imena i prezimena -->
-    <EditText
-        android:id="@+id/editTextImePrezime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/ime_prezime_hint"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/naslov_registracija"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEmail" />
 
     <!-- Polje za unos email adrese -->
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextLoginEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -48,14 +33,14 @@
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/editTextImePrezime"
+        app:layout_constraintTop_toBottomOf="@+id/naslov_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/editTextLozinka" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextLoginLozinka" />
 
-    <!-- Polje za unos lozinke (skriveni unos) - ZAHTEV 3 -->
+    <!-- Polje za unos lozinke (skriveni unos) -->
     <EditText
-        android:id="@+id/editTextLozinka"
+        android:id="@+id/editTextLoginLozinka"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -63,23 +48,24 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRegistracija" />
+        app:layout_constraintBottom_toTopOf="@+id/buttonPrijava" />
 
-    <!-- Dugme za registraciju -->
+    <!-- Dugme za prijavu - ZAHTEV 6 -->
     <Button
-        android:id="@+id/buttonRegistracija"
+        android:id="@+id/buttonPrijava"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/registruj_se"
+        android:text="@string/prijavi_se"
         android:textSize="16sp"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLozinka"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginLozinka"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
