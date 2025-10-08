@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="sign_in">Login</string>
+    <string name="login">Login</string>
+    <string name="trazi_dozvolu">Trazi dozvolu</string>
+    <string name="oboji_element">Oboji element</string>
+</resources>
