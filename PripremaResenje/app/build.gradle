@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.pripremaresenje'
+    namespace 'com.example.kolokvijum1'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.pripremaresenje"
+        applicationId "com.example.kolokvijum1"
         minSdk 30
         targetSdk 34
         versionCode 1
