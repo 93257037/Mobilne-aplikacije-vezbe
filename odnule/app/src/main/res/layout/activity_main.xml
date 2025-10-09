@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Poruka dobrodošlice -->
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dobrodošli!"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Info o sinhronizaciji -->
+        <TextView
+            android:id="@+id/tvSyncInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sinhronizacija: Nikad"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Razdvajač -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Naslov sekcije glavnih funkcija -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Glavne funkcije:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Dugme 1: Pokretanje MusicService-a -->
+        <Button
+            android:id="@+id/btnStartMusic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pokreni muziku i notifikaciju"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Dugme 2: Prelazak na TestActivity -->
+        <Button
+            android:id="@+id/btnGoToTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Idi na TestActivity"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Razdvajač -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Naslov sekcije dodatnih funkcija -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dodatne funkcije:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Dugme za podešavanja sinhronizacije -->
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Podešavanja sinhronizacije"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Dugme za kontakte (ContentProvider) -->
+        <Button
+            android:id="@+id/btnContacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Prikaži kontakte (ContentProvider)"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Razdvajač -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Dugme za odjavu -->
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Odjavi se"
+            android:padding="12dp"
+            android:backgroundTint="#FF5252" />
+
+        <!-- Info tekst -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Napomena: Kliknite na 'Ispiši' dugme u notifikaciji da obojite tekst u TestActivity"
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:layout_marginTop="24dp"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+</ScrollView>

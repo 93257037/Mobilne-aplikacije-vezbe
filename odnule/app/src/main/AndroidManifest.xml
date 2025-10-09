@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Dozvole -->
+    <!-- Dozvola za čitanje kontakata (ContentProvider) -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    
+    <!-- Dozvola za foreground service -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    
+    <!-- Dozvola za foreground service media playback (Android 14+) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    
+    <!-- Dozvola za post notifikacije (Android 13+) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.VezbePetISest"
+        tools:targetApi="31">
+        
+        <!-- LoginActivity - početni ekran za logovanje -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- MainActivity - glavni ekran aplikacije -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        
+        <!-- TestActivity - ekran sa tekstom koji se boji -->
+        <activity
+            android:name=".TestActivity"
+            android:exported="false" />
+        
+        <!-- SettingsActivity - ekran za podešavanja sinhronizacije -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        
+        <!-- ContactsActivity - ekran za prikaz kontakata (ContentProvider) -->
+        <activity
+            android:name=".ContactsActivity"
+            android:exported="false" />
+
+        <!-- MusicService - servis za puštanje muzike -->
+        <service
+            android:name=".MusicService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <!-- PrintBroadcastReceiver - prima broadcast iz notifikacije -->
+        <receiver
+            android:name=".PrintBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false" />
+    </application>
+
+</manifest>
