@@ -1,0 +1,78 @@
+<resources>
+    <!-- Naziv aplikacije -->
+    <string name="app_name">OdNule</string>
+    <string name="app_slogan">Vaša online prodavnica</string>
+    <string name="app_version">Verzija 1.0</string>
+    <string name="app_logo_description">Logo aplikacije</string>
+
+    <!-- SplashScreen -->
+    <!-- (nema dodatnih tekstova) -->
+
+    <!-- LoginScreen -->
+    <string name="login_title">Prijava</string>
+    <string name="login_subtitle">Prijavite se na svoj nalog</string>
+    <string name="hint_email">Email adresa</string>
+    <string name="hint_password">Lozinka</string>
+    <string name="btn_login">Prijavi se</string>
+    <string name="btn_go_to_register">Kreiraj novi nalog</string>
+    <string name="or_text">ILI</string>
+    <string name="error_email_required">Email adresa je obavezna</string>
+    <string name="error_password_required">Lozinka je obavezna</string>
+    <string name="login_success">Uspešno ste se prijavili!</string>
+
+    <!-- RegisterScreen -->
+    <string name="register_title">Registracija</string>
+    <string name="register_subtitle">Kreirajte novi nalog</string>
+    <string name="hint_first_name">Ime</string>
+    <string name="hint_last_name">Prezime</string>
+    <string name="hint_phone">Broj telefona</string>
+    <string name="hint_confirm_password">Potvrdite lozinku</string>
+    <string name="btn_register">Registruj se</string>
+    <string name="btn_back_to_login">Nazad na prijavu</string>
+    <string name="error_first_name_required">Ime je obavezno</string>
+    <string name="error_last_name_required">Prezime je obavezno</string>
+    <string name="error_phone_required">Broj telefona je obavezan</string>
+    <string name="error_confirm_password_required">Potvrda lozinke je obavezna</string>
+    <string name="error_passwords_not_match">Lozinke se ne poklapaju</string>
+    <string name="registration_success">Uspešno ste se registrovali!</string>
+
+    <!-- HomeScreen -->
+    <string name="welcome_default">Dobrodošli!</string>
+    <string name="welcome_message">Dobrodošli, %1$s!</string>
+    <string name="welcome_message_email">Dobrodošli, %1$s!</string>
+
+    <!-- NavigationDrawer -->
+    <string name="navigation_drawer_open">Otvori navigacioni meni</string>
+    <string name="navigation_drawer_close">Zatvori navigacioni meni</string>
+    <string name="nav_header_subtitle">Dobrodošli u OdNule</string>
+    <string name="nav_main">Proizvodi</string>
+    <string name="nav_account">Moj nalog</string>
+    <string name="nav_notifications">Obaveštenja</string>
+    <string name="nav_section_other">Ostalo</string>
+    <string name="nav_logout">Odjavi se</string>
+    <string name="user_avatar_description">Avatar korisnika</string>
+
+    <!-- MainScreen -->
+    <string name="main_title">Proizvodi</string>
+    <string name="hint_search_products">Pretražite proizvode…</string>
+
+    <!-- AccountScreen -->
+    <string name="account_title">Moj nalog</string>
+    <string name="account_birth_year">%1$d godina</string>
+    <string name="account_age">%1$d godina</string>
+    <string name="account_birth_year_label">Godište:</string>
+    <string name="account_age_label">Starost:</string>
+    <string name="account_settings_title">Podešavanja</string>
+    <string name="btn_edit_profile">Izmeni profil</string>
+    <string name="btn_change_password">Promeni lozinku</string>
+
+    <!-- NotificationsScreen -->
+    <string name="notifications_title">Obaveštenja</string>
+
+    <!-- ProductDetailScreen -->
+    <string name="product_description_title">Opis proizvoda</string>
+    <string name="btn_add_to_cart">Dodaj u korpu</string>
+    <string name="product_added_to_cart">%1$s je dodat u korpu</string>
+    <string name="product_image_description">Slika proizvoda</string>
+
+</resources>
