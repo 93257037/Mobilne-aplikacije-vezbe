@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">PripremaResenje</string>
+    <string name="knjige">Knjige</string>
+    <string name="autori">Autori</string>
+    <string name="komentari">Komentari</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="obrisi">Obrisi</string>
+    <string name="dodaj">Dodaj</string>
+    <string name="unesite_naslov_knjige">Unesite naslov knjige</string>
+    <string name="unesite_broj_stranica">Unesite broj stranica</string>
+    <string name="unesite_tip_poveza">Unesite tip poveza</string>
+    <string name="unesite_zanr">Unesite zanr</string>
+    <string name="potvrdi">Potvrdi</string>
+    <string name="unesite_ime_i_prezime">Unesite ime i prezime</string>
+    <string name="unesite_komentar">Unesite komentar</string>
+    <string name="naslov">Naslov: </string>
+    <string name="broj_stranica">Broj stranica: </string>
+    <string name="povez">Povez: </string>
+    <string name="zanr">Zanr: </string>
+    <string name="autor">Autor:</string>
+</resources>
