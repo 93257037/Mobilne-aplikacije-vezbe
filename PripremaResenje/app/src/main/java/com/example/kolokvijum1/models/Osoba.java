@@ -1,31 +1,20 @@
 package com.example.kolokvijum1.models;
 
-/**
- * Osoba - model klasa koja predstavlja entitet u bazi podataka
- * Sa poljima: ime i godiste
- */
 public class Osoba {
     
     private int id;
     private String ime;
     private int godiste;
 
-    /**
-     * Prazan konstruktor
-     */
     public Osoba() {
     }
 
-    /**
-     * Konstruktor sa parametrima
-     */
     public Osoba(int id, String ime, int godiste) {
         this.id = id;
         this.ime = ime;
         this.godiste = godiste;
     }
 
-    // Getters and Setters
     public int getId() {
         return id;
     }

@@ -13,9 +13,6 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.kolokvijum1.R;
 
-/**
- * ColorChangeReceiver - prima broadcast poruke o promeni boje
- */
 public class ColorChangeReceiver extends BroadcastReceiver {
     
     private static final String TAG = "ColorChangeReceiver";
@@ -28,12 +25,10 @@ public class ColorChangeReceiver extends BroadcastReceiver {
         Log.d(TAG, "Received color: " + color);
         
         if (color != null) {
-            // Šaljemo broadcast nazad ka SecondActivity da promeni boju
             Intent colorIntent = new Intent("com.example.kolokvijum1.UPDATE_COLOR");
             colorIntent.putExtra("color", color);
             context.sendBroadcast(colorIntent);
             
-            // Šaljemo notifikaciju
             sendNotification(context, color);
         }
     }
@@ -42,7 +37,6 @@ public class ColorChangeReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = 
             (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         
-        // Kreiramo notification channel za Android 8.0+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                 CHANNEL_ID,

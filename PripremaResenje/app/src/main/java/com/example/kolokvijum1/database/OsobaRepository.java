@@ -12,9 +12,6 @@ import com.example.kolokvijum1.models.Osoba;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * OsobaRepository - klasa za rad sa Osoba entitetom u bazi
- */
 public class OsobaRepository {
     
     private SQLiteHelper sqLiteHelper;
@@ -23,9 +20,6 @@ public class OsobaRepository {
         sqLiteHelper = SQLiteHelper.getInstance(context);
     }
 
-    /**
-     * Dodaje novu osobu u bazu
-     */
     public long insert(String ime, int godiste) {
         SQLiteDatabase db = sqLiteHelper.getWritableDatabase();
         
@@ -37,9 +31,6 @@ public class OsobaRepository {
         return id;
     }
 
-    /**
-     * Vraća sve osobe iz baze
-     */
     public List<Osoba> getAll() {
         List<Osoba> osobe = new ArrayList<>();
         SQLiteDatabase db = sqLiteHelper.getReadableDatabase();

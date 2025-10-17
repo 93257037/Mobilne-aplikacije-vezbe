@@ -28,13 +28,11 @@
             android:name=".SecondActivity"
             android:exported="false" />
         
-        <!-- Service za proveravanje boje -->
         <service
             android:name=".services.BackgroundService"
             android:enabled="true"
             android:exported="false" />
         
-        <!-- BroadcastReceiver za primanje boje -->
         <receiver
             android:name=".receivers.ColorChangeReceiver"
             android:enabled="true"

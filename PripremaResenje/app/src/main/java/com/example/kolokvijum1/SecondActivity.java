@@ -16,9 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.kolokvijum1.receivers.ColorChangeReceiver;
 import com.example.kolokvijum1.services.BackgroundService;
 
-/**
- * SecondActivity - aktivnost sa plavom pozadinom i Switch-om
- */
 public class SecondActivity extends AppCompatActivity {
 
     private Switch switchService;
@@ -34,7 +31,6 @@ public class SecondActivity extends AppCompatActivity {
         layout = findViewById(R.id.secondActivityLayout);
         switchService = findViewById(R.id.switchService);
         
-        // Registrujemo receiver za primanje boje
         colorChangeReceiver = new ColorChangeReceiver();
         IntentFilter filter = new IntentFilter("com.example.kolokvijum1.COLOR_CHANGE");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -43,7 +39,6 @@ public class SecondActivity extends AppCompatActivity {
             registerReceiver(colorChangeReceiver, filter);
         }
         
-        // Registrujemo receiver za update boje u UI
         colorUpdateReceiver = new ColorUpdateReceiver();
         IntentFilter updateFilter = new IntentFilter("com.example.kolokvijum1.UPDATE_COLOR");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -52,17 +47,14 @@ public class SecondActivity extends AppCompatActivity {
             registerReceiver(colorUpdateReceiver, updateFilter);
         }
         
-        // Postavljamo listener na Switch
         switchService.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Intent serviceIntent = new Intent(SecondActivity.this, BackgroundService.class);
                 
                 if (isChecked) {
-                    // Pokrećemo servis
                     startService(serviceIntent);
                 } else {
-                    // Zaustavljamo servis
                     stopService(serviceIntent);
                 }
             }
@@ -72,7 +64,6 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Deregistrujemo receivere
         if (colorChangeReceiver != null) {
             unregisterReceiver(colorChangeReceiver);
         }
@@ -81,9 +72,6 @@ public class SecondActivity extends AppCompatActivity {
         }
     }
     
-    /**
-     * Lokalni receiver koji prima boju i menja pozadinu
-     */
     private class ColorUpdateReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
