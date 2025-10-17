@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- "Mark Favorite", must appear as action button if possible. -->
+    <item
+        android:id="@+id/action_knjige"
+        android:title="@string/knjige"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_autori"
+        android:title="@string/autori"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_komentari"
+        android:title="@string/komentari"
+        app:showAsAction="never"/>
+
+</menu>
