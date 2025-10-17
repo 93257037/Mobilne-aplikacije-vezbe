@@ -39,21 +39,18 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static SQLiteHelper sqLiteHelper;
 
     /**
-     * SQL upit za kreiranje tabele KORISNIK
+     * SQL upit za kreiranje tabele OSOBA
      * 
      * Struktura tabele:
-     * - _id: integer primary key autoincrement (automatski se povećava)
-     * - ime: text (tekstualno polje za čuvanje imena)
-     * 
-     * Objašnjenje SQL-a:
-     * CREATE TABLE - komanda za kreiranje nove tabele
-     * integer primary key autoincrement - definiše _id kao primarni ključ koji se automatski povećava
-     * text - tip podatka za tekstualne vrednosti
+     * - _id: integer primary key autoincrement
+     * - ime: text
+     * - godiste: integer
      */
-    private static final String DB_CREATE_KORISNIK = "create table "
-            + TABLE_KORISNIK + "("          // Naziv tabele iz konstanti: KORISNIK
-            + COLUMN_ID  + " integer primary key autoincrement, "  // _id kolona
-            + COLUMN_IME + " text"          // ime kolona
+    private static final String DB_CREATE_OSOBA = "create table "
+            + TABLE_OSOBA + "("
+            + COLUMN_ID  + " integer primary key autoincrement, "
+            + COLUMN_IME + " text, "
+            + COLUMN_GODISTE + " integer"
             + ")";
 
     /**
@@ -112,18 +109,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Logujemo poruku da pratimo kada se baza kreira
-        // Log.i - info level log
-        // "KOLOKVIJUM_DB" - tag za filtriranje logova
         Log.i("KOLOKVIJUM_DB", "ON CREATE SQLITE HELPER");
-        
-        // execSQL - izvršava SQL komandu
-        // Ovde izvršavamo CREATE TABLE komandu koja kreira tabelu KORISNIK
-        db.execSQL(DB_CREATE_KORISNIK);
-        
-        // Kada bi imali više tabela, ovde bismo dodali više execSQL poziva
-        // db.execSQL(DB_CREATE_DRUGA_TABELA);
-        // db.execSQL(DB_CREATE_TRECA_TABELA);
+        db.execSQL(DB_CREATE_OSOBA);
     }
 
     /**
@@ -143,16 +130,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Logujemo upgrade operaciju
         Log.i("KOLOKVIJUM_DB", "ON UPGRADE SQLITE HELPER");
-        
-        // Brišemo staru tabelu ako postoji
-        // DROP TABLE IF EXISTS - SQL komanda koja briše tabelu
-        // IF EXISTS - sprečava grešku ako tabela ne postoji
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_KORISNIK);
-        
-        // Kreiramo tabelu ponovo sa novom strukturom
-        // Pozivamo onCreate koja izvršava CREATE TABLE komandu
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_OSOBA);
         onCreate(db);
     }
 }

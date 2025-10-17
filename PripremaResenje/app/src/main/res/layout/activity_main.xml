@@ -4,22 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
     tools:context=".MainActivity">
 
-    <!-- First Fragment Container - Top Half -->
-    <FrameLayout
-        android:id="@+id/firstFragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#F0F0F0"/>
+    <CheckBox
+        android:id="@+id/checkboxLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dozvoli lokaciju"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"/>
 
-    <!-- Second Fragment Container - Bottom Half -->
-    <FrameLayout
-        android:id="@+id/secondFragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#FFFFFF"/>
+    <Button
+        android:id="@+id/btnDugme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dugme"
+        android:textSize="18sp"/>
 
 </LinearLayout>

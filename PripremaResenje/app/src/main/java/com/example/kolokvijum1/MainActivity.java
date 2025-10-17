@@ -1,103 +1,96 @@
 package com.example.kolokvijum1;
 
-// Import-ujemo potrebne klase za rad sa SharedPreferences-om
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
 
-// Import-ujemo AppCompatActivity kao baznu klasu za aktivnost
 import androidx.appcompat.app.AppCompatActivity;
-// Import-ujemo FragmentTransaction za upravljanje fragmentima
-import androidx.fragment.app.FragmentTransaction;
 
-// Import-ujemo naše fragmente koje smo kreirali
-import com.example.kolokvijum1.fragments.FirstFragment;
-import com.example.kolokvijum1.fragments.SecondFragment;
+import com.example.kolokvijum1.database.OsobaRepository;
 
 /**
  * MainActivity - glavna aktivnost aplikacije
- * Ova aktivnost sadrži dva fragmenta: FirstFragment (gore) i SecondFragment (dole)
- * 
- * Zadatak 2: Prva aktivnost (MainActivity) sadrži dva fragmenta.
- * Prvi fragment (FirstFragment) se nalazi u gornjoj polovini aktivnosti,
- * dok se drugi (SecondFragment) nalazi u donjoj polovini aktivnosti.
+ * Sadrži Checkbox za lokaciju i Button za prelazak na drugu aktivnost
  */
 public class MainActivity extends AppCompatActivity {
 
-    /**
-     * onCreate - metoda koja se poziva kada se aktivnost kreira
-     * Ovo je prva metoda koja se izvršava kada korisnik otvori aplikaciju
-     */
+    private CheckBox checkboxLocation;
+    private Button btnDugme;
+    private OsobaRepository osobaRepository;
+    private static final int DEFAULT_GODISTE = 2000; // Promenite na vaše godište
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Pozivamo onCreate metodu roditeljske klase (obavezno)
         super.onCreate(savedInstanceState);
-        
-        // Postavljamo layout za ovu aktivnost
-        // activity_main.xml sadrži dva FrameLayout kontejnera za fragmente
         setContentView(R.layout.activity_main);
 
-        // Zadatak 3: U SharedPreferences pod ključem: "inicijalno" upisati: "Zdravo!"
-        // Pozivamo metodu koja inicijalizuje SharedPreferences
-        initializeSharedPreferences();
+        // Inicijalizujemo repository
+        osobaRepository = new OsobaRepository(this);
 
-        // Učitavamo fragmente samo ako aktivnost nije prethodno sačuvana
-        // savedInstanceState je null kada je aktivnost prvi put kreirana
-        // Ako je aktivnost rotirana ili promenjena, savedInstanceState NIJE null
-        // i ne treba ponovo dodavati fragmente jer već postoje
-        if (savedInstanceState == null) {
-            loadFragments();
-        }
+        // Pronalazimo view elemente
+        checkboxLocation = findViewById(R.id.checkboxLocation);
+        btnDugme = findViewById(R.id.btnDugme);
+
+        // Postavljamo click listener na dugme
+        btnDugme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Proveravamo da li je checkbox čekiran
+                if (checkboxLocation.isChecked()) {
+                    // Ako jeste, otvaramo dialog
+                    showDialog();
+                } else {
+                    // Ako nije, prikazujemo Toast poruku
+                    Toast.makeText(MainActivity.this, 
+                        "Morate dozvoliti lokaciju!", 
+                        Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     /**
-     * Zadatak 3: U SharedPreferences pod ključem: "inicijalno" upisati: "Zdravo!"
-     * 
-     * SharedPreferences je lokalno skladište ključ-vrednost parova
-     * Koristi se za čuvanje malih količina podataka (postavke, vrednosti, itd.)
+     * Prikazuje dialog sa EditText poljem za unos imena
      */
-    private void initializeSharedPreferences() {
-        // Dobijamo instancu SharedPreferences-a sa nazivom "MyPrefs"
-        // MODE_PRIVATE znači da su podaci dostupni samo ovoj aplikaciji
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         
-        // Proveravamo da li ključ "inicijalno" već postoji
-        // Ovo sprečava da pregazimo postojeću vrednost svaki put kada se pokrene aplikacija
-        if (!sharedPreferences.contains("inicijalno")) {
-            // Kreiramo Editor objekat koji omogućava izmenu SharedPreferences-a
-            SharedPreferences.Editor editor = sharedPreferences.edit();
+        // Kreiramo EditText za unos imena
+        View dialogView = LayoutInflater.from(this).inflate(
+            android.R.layout.simple_list_item_1, null);
+        final EditText editText = new EditText(this);
+        editText.setHint("Unesite ime");
+        
+        builder.setView(editText);
+        builder.setTitle("Unos imena");
+        
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            String ime = editText.getText().toString().trim();
             
-            // Postavljamo vrednost "Zdravo!" za ključ "inicijalno"
-            editor.putString("inicijalno", "Zdravo!");
-            
-            // apply() asinkrono čuva promene (ne blokira UI thread)
-            // Alternativa je commit() koja čuva sinkrono i vraća boolean
-            editor.apply();
-        }
-    }
-
-    /**
-     * Metoda koja učitava oba fragmenta u svoje kontejnere
-     * FirstFragment ide u gornji kontejner, SecondFragment u donji
-     */
-    private void loadFragments() {
-        // Dobijamo FragmentTransaction objekat koji omogućava dodavanje/zamenu fragmenata
-        // FragmentTransaction radi kao transakcija u bazi - sve promene se izvršavaju odjednom
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            if (!ime.isEmpty()) {
+                // Čuvamo u bazu sa default godištem
+                long id = osobaRepository.insert(ime, DEFAULT_GODISTE);
+                Toast.makeText(MainActivity.this, 
+                    "Sačuvano: " + ime + " (ID: " + id + ")", 
+                    Toast.LENGTH_SHORT).show();
+                
+                // Prelazimo na SecondActivity
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(MainActivity.this, 
+                    "Ime ne može biti prazno!", 
+                    Toast.LENGTH_SHORT).show();
+            }
+        });
         
-        // Dodajemo FirstFragment u gornji kontejner (firstFragmentContainer)
-        // replace() metoda zamenjuje postojeći fragment ili dodaje novi ako ne postoji
-        // R.id.firstFragmentContainer je ID FrameLayout-a iz activity_main.xml
-        // FirstFragment.newInstance() poziva statičku factory metodu koja kreira fragment
-        transaction.replace(R.id.firstFragmentContainer, FirstFragment.newInstance());
-        
-        // Dodajemo SecondFragment u donji kontejner (secondFragmentContainer)
-        // Oba fragmenta se dodaju u istoj transakciji
-        transaction.replace(R.id.secondFragmentContainer, SecondFragment.newInstance());
-        
-        // commit() izvršava sve promene koje smo dodali u transakciju
-        // Ovo zapravo prikazuje fragmente na ekranu
-        transaction.commit();
+        builder.setNegativeButton("Otkaži", null);
+        builder.show();
     }
 }
-

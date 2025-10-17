@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/secondActivityLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#0000FF"
+    android:padding="16dp">
 
-    <TextView
+    <Switch
+        android:id="@+id/switchService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nema dozvole!"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:text="Uključi servis"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
 
 </LinearLayout>
 

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -26,6 +27,22 @@
         <activity
             android:name=".SecondActivity"
             android:exported="false" />
+        
+        <!-- Service za proveravanje boje -->
+        <service
+            android:name=".services.BackgroundService"
+            android:enabled="true"
+            android:exported="false" />
+        
+        <!-- BroadcastReceiver za primanje boje -->
+        <receiver
+            android:name=".receivers.ColorChangeReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.kolokvijum1.COLOR_CHANGE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
