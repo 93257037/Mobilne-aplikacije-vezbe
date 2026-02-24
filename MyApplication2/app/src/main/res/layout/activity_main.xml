@@ -1,69 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp"
     tools:context=".MainActivity">
 
-    <!-- 1) TextView - will show location (lat, lng) and later product / other text -->
-    <TextView
-        android:id="@+id/textViewInfo"
-        android:layout_width="0dp"
+    <!-- EditText 1: triggers camera when "kamera" is typed, or fetches comment by number -->
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lokacija će biti prikazana ovde"
-        android:textSize="16sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:hint="Unesite 'kamera' ili broj komentara"
+        android:inputType="text"
+        android:imeOptions="actionDone" />
 
-    <!-- 2) ImageButton - opens camera -->
-    <ImageButton
-        android:id="@+id/imageButtonCamera"
-        android:layout_width="wrap_content"
+    <!-- EditText 2: shows comment text / location / accelerometer -->
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/app_name"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintTop_toBottomOf="@id/textViewInfo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="12dp"
+        android:hint="Rezultat"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:gravity="top"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:cursorVisible="false" />
 
-    <!-- 3) ImageView - shows captured photo -->
+    <!-- ImageView: shows photo taken by camera -->
     <ImageView
         android:id="@+id/imageViewPhoto"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:scaleType="centerCrop"
         android:background="#E0E0E0"
-        android:contentDescription="Captured photo"
-        app:layout_constraintTop_toBottomOf="@id/imageButtonCamera"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:contentDescription="Captured photo" />
 
-    <!-- 4) Switch - controls music on/off and will be used for the second-on behavior -->
+    <!-- Checkbox: controls sound playback -->
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Reprodukuj zvuk" />
+
+    <!-- Switch: on = repeat, off = once -->
     <Switch
-        android:id="@+id/switchMusic"
+        android:id="@+id/switchRepeat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Muzika"
-        app:layout_constraintTop_toBottomOf="@id/imageViewPhoto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="12dp"
+        android:text="Ponavljaj zvuk" />
 
-    <!-- 5) Button - text shows accelerometer in real time, click updates TextView with first product -->
-    <Button
-        android:id="@+id/buttonProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Akcelerometar"
-        app:layout_constraintTop_toBottomOf="@id/switchMusic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
