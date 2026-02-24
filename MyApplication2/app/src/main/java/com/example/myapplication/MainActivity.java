@@ -164,27 +164,29 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if (isChecked) {
                 checkboxOnCount++;
 
-                if (checkboxOnCount == 1) {
-                    playSound();
+                // Spec point 4: whenever Checkbox is checked, play sound
+                playSound();
 
-                } else if (checkboxOnCount == 2) {
-                    stopSound();
+                if (checkboxOnCount == 2) {
+                    // Spec point 8: second time checked → show location
                     showingAccelerometer = false;
                     requestLocationAndShow();
 
                 } else if (checkboxOnCount == 3) {
+                    // Spec point 9: third time checked → show accelerometer
                     stopLocationUpdates();
                     showingAccelerometer = true;
 
-                } else {
-                    checkboxOnCount = 0;
-                    stopSound();
+                } else if (checkboxOnCount > 3) {
+                    // After third, start cycle again on next checks
+                    checkboxOnCount = 1;
                     stopLocationUpdates();
                     showingAccelerometer = false;
                     editText2.setText("");
                 }
 
             } else {
+                // Spec point 5: when Checkbox is not checked, stop sound
                 stopSound();
                 stopLocationUpdates();
                 showingAccelerometer = false;
