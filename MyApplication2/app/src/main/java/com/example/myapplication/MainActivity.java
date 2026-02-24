@@ -4,13 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -33,10 +26,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
+public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_LOCATION_PERMISSION = 100;
-    private static final int REQUEST_CAMERA_PERMISSION   = 101;
+    private static final int REQUEST_CAMERA_PERMISSION = 101;
 
     private EditText editText1;
     private EditText editText2;
@@ -46,20 +38,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private ActivityResultLauncher<Intent> cameraLauncher;
 
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-    private boolean locationUpdatesStarted = false;
-
-    private SensorManager sensorManager;
-    private Sensor accelerometer;
-
     private MediaPlayer mediaPlayer;
 
-    private int checkboxOnCount = 0;
-
     private ApiService apiService;
-
-    private boolean showingAccelerometer = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         initViews();
         initCameraLauncher();
-        initLocation();
-        initSensors();
         initMediaPlayer();
         initRetrofit();
         setupListeners();
@@ -102,27 +81,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
                 }
         );
-    }
-
-    private void initLocation() {
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(@NonNull Location location) {
-                if (checkboxOnCount == 2 && checkBox.isChecked()) {
-                    double lat = location.getLatitude();
-                    double lng = location.getLongitude();
-                    editText2.setText("Lat: " + lat + "\nLng: " + lng);
-                }
-            }
-        };
-    }
-
-    private void initSensors() {
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        if (sensorManager != null) {
-            accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        }
     }
 
     private void initMediaPlayer() {
@@ -162,34 +120,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                checkboxOnCount++;
-
-                // Spec point 4: whenever Checkbox is checked, play sound
                 playSound();
-
-                if (checkboxOnCount == 2) {
-                    // Spec point 8: second time checked → show location
-                    showingAccelerometer = false;
-                    requestLocationAndShow();
-
-                } else if (checkboxOnCount == 3) {
-                    // Spec point 9: third time checked → show accelerometer
-                    stopLocationUpdates();
-                    showingAccelerometer = true;
-
-                } else if (checkboxOnCount > 3) {
-                    // After third, start cycle again on next checks
-                    checkboxOnCount = 1;
-                    stopLocationUpdates();
-                    showingAccelerometer = false;
-                    editText2.setText("");
-                }
-
             } else {
-                // Spec point 5: when Checkbox is not checked, stop sound
                 stopSound();
-                stopLocationUpdates();
-                showingAccelerometer = false;
             }
         });
     }
@@ -231,48 +164,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
-    private void requestLocationAndShow() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_LOCATION_PERMISSION
-            );
-        } else {
-            startLocationUpdates();
-        }
-    }
-
-    private void startLocationUpdates() {
-        if (locationUpdatesStarted) return;
-        try {
-            locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    2000,
-                    0f,
-                    locationListener
-            );
-            locationUpdatesStarted = true;
-
-            Location last = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (last != null) {
-                editText2.setText("Lat: " + last.getLatitude() + "\nLng: " + last.getLongitude());
-            } else {
-                editText2.setText("Čekanje na lokaciju...");
-            }
-        } catch (SecurityException e) {
-            Toast.makeText(this, "Dozvola za lokaciju nije odobrena", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void stopLocationUpdates() {
-        if (locationUpdatesStarted) {
-            locationManager.removeUpdates(locationListener);
-            locationUpdatesStarted = false;
-        }
-    }
-
     private void fetchComment(int id) {
         Call<Comment> call = apiService.getComment(id);
         call.enqueue(new Callback<Comment>() {
@@ -298,33 +189,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     @Override
-    public void onSensorChanged(SensorEvent event) {
-        if (showingAccelerometer && event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            float x = event.values[0];
-            float y = event.values[1];
-            float z = event.values[2];
-            editText2.setText(String.format("Ax: %.2f\nAy: %.2f\nAz: %.2f", x, y, z));
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (accelerometer != null) {
-            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
-        if (sensorManager != null) {
-            sensorManager.unregisterListener(this);
-        }
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
         }
@@ -333,7 +199,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopLocationUpdates();
         if (mediaPlayer != null) {
             mediaPlayer.release();
             mediaPlayer = null;
@@ -346,13 +211,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == REQUEST_LOCATION_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startLocationUpdates();
-            } else {
-                Toast.makeText(this, "Dozvola za lokaciju je odbijena", Toast.LENGTH_SHORT).show();
-            }
-        } else if (requestCode == REQUEST_CAMERA_PERMISSION) {
+        if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 launchCamera();
             } else {
